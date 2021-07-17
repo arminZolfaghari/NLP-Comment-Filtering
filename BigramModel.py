@@ -9,8 +9,10 @@ class BigramModel():
         self.train_negative_set = train_neg_set
         self.lambda_arr = lambda_arr        # [h0, h1, h2] => weights for probability
         self.epsilon = epsilon
-        self.train_pos_dict = {}
-        self.train_neg_dict = {}
+        self.count_unary_train_pos_dict = {}
+        self.count_unary_train_neg_dict = {}
+        self.count_binary_train_pos_dict = {}
+        self.count_binary_train_neg_dict = {}
 
 
     def create_pos_words_dict(self):
@@ -38,6 +40,7 @@ class BigramModel():
                     self.train_neg_dict[word] = 1
 
 
+    def calculate_probability
 
     # calculate p(wi|wi-1) = h2 * p(wi|wi-1) + h1 * p(wi) + h0 * e
     def calculate_conditional_probability(self):
