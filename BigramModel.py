@@ -155,6 +155,7 @@ class BigramModel():
 
     # start learning and create unary and binary words dictionary
     def learning(self):
+
         self.create_unary_words_dict()
         self.create_binary_words_dict()
 
