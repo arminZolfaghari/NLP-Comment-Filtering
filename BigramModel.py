@@ -20,6 +20,16 @@ class BigramModel():
         self.count_binary_train_neg_dict = {}
         self.number_words_in_neg = 0
         self.number_words_in_pos = 0
+        self.alpha_cut = 2
+
+    def do_alpha_cut(self):
+        for word in self.count_unary_train_pos_dict.keys():
+            if self.count_unary_train_pos_dict[word] <= 2:
+                del self.count_unary_train_pos_dict[word]
+
+        for word in self.count_unary_train_neg_dict.keys():
+            if self.count_unary_train_neg_dict[word] <= 2:
+                del self.count_unary_train_neg_dict[word]
 
     def create_unary_words_dict(self):
         for sentence in self.train_positive_set:
