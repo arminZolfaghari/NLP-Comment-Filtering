@@ -3,10 +3,11 @@ from collections import Counter
 
 class BigramModel():
 
-    def __init__(self, train_pos_set, train_neg_set, lambda_arr):
+    def __init__(self, train_pos_set, train_neg_set, lambda_arr, epsilon):
         self.train_positive_set = train_pos_set
         self.train_negative_set = train_neg_set
-        self.lambda_arr = lambda_arr        # [h0, h1, h2]
+        self.lambda_arr = lambda_arr        # [h0, h1, h2] => weights for probability
+        self.epsilon = epsilon
 
     def create_words_dict(self, words_dict, dataset):  # dataset is an array of sentences (each element is a sentence)
         # dataset example = ["this is sent1", "this is sent2"]
@@ -23,6 +24,12 @@ class BigramModel():
                 else:
                     words_dict[word] = 1
         return words_dict
+
+
+    # calculate p(wi|wi-1) = h2 * p(wi|wi-1) + h1 * p(wi) + h0 * e
+    def calculate_conditional_probability(self):
+
+
 
     def recognize_sentence(self, sentence):
         sentence_arr = sentence.split(" ")
