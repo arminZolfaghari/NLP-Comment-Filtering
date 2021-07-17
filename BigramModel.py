@@ -33,8 +33,7 @@ class BigramModel():
                     self.train_neg_dict[word] += 1
                 else:
                     self.train_neg_dict[word] = 1
-                    words_dict[word] = 1
-        return words_dict
+
 
     def recognize_sentence(self, sentence):
         sentence_arr = sentence.split(" ")
