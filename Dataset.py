@@ -57,6 +57,15 @@ def pre_process(set):
 
     return set
 
+def add_start_end_tag(dataset):
+    new_dataset = []
+    for sentence in dataset:
+        words_in_sent = sentence.split(' ')
+        words_in_sent.insert(0, '<s>')
+        words_in_sent.append('</s>')
+        new_dataset.append(words_in_sent)
+    return new_dataset
+
 
 sett = store_positive_comments_from_file()
 print(sett[0])
