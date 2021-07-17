@@ -109,16 +109,14 @@ class BigramModel():
 
     # calculate p(w) = count(w)/M   (M: all words in dictionary)
     def calculate_unary_probability(self, word, dataset_mode):
+        res = 0
         if dataset_mode == "positive":
-            if word in self.count_unary_train_pos_dict:
+            if word in self.count_unary_train_pos_dict.keys():
                 res = self.count_unary_train_pos_dict[word] / self.number_words_in_pos
-            else:
-                res = 0
+
         elif dataset_mode == "negative":
-            if word in self.count_unary_train_neg_dict:
+            if word in self.count_unary_train_neg_dict.keys():
                 res = self.count_unary_train_neg_dict[word] / self.number_words_in_neg
-            else:
-                res = 0
 
         return res
 
@@ -130,6 +128,6 @@ class BigramModel():
             word2, dataset_mode) + h0 * self.epsilon
         return res
 
-    # recognize sentence is positive or negative
+    # recognize sentence: is positive or negative
     def recognize_sentence(self, sentence):
         words_array = get_words_array()
