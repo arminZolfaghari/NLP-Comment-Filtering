@@ -1,6 +1,11 @@
 from collections import Counter
 
 
+# insert <s> to first and append </s> to end array
+def standardize_sentence(sentence):
+
+
+
 class BigramModel():
 
     def __init__(self, train_pos_set, train_neg_set, lambda_arr, epsilon):
@@ -121,4 +126,4 @@ class BigramModel():
     def recognize_sentence(self, sentence):
         sentence_arr = sentence.split(" ")
         for i in range(len(sentence_arr)):
-            pass
+
