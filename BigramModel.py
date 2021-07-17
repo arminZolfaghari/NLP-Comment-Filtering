@@ -122,7 +122,6 @@ class BigramModel():
 
     def calculate_sentence_probability(self, sentence, dataset_mode):
         words_array = get_words_array(sentence)
-
         PI = self.calculate_unary_probability(words_array[0], dataset_mode)
         for i in range(1, len(words_array)):
             PI *= self.calculate_conditional_probability(words_array[i - 1], words_array[i], dataset_mode)
@@ -130,3 +129,12 @@ class BigramModel():
         return PI
 
     # recognize sentence is positive or negative
+    def recognize_sentence(self, sentence):
+        prob_given_sentence_is_negative = self.calculate_sentence_probability(sentence, "negative")
+        prob_given_sentence_is_positive = self.calculate_sentence_probability(sentence, "positive")
+        if prob_given_sentence_is_positive > prob_given_sentence_is_negative:
+            return "positive"
+        elif prob_given_sentence_is_positive < prob_given_sentence_is_negative:
+            return "negative"
+        else:
+            return "equal"
