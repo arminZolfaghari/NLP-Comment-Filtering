@@ -9,5 +9,4 @@ class BigramModel():
         self.train_negative_set = train_neg_set
 
 
-    def pre_process(self):
 
