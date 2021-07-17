@@ -1,4 +1,5 @@
-
+from Dataset import *
+import BigramModel
 
 
 if __name__ == "__main__":

@@ -53,6 +53,7 @@ class BigramModel():
                 else:
                     self.count_unary_train_neg_dict[word] = 1
 
+        self.do_alpha_cut()     #
         self.calculate_number_words()  # to calculate numbers of all words
 
     def create_binary_words_dict(self):
