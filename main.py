@@ -4,6 +4,8 @@ import BigramModel
 
 if __name__ == "__main__":
     # TODO read datasets
+    positive_train_set, positive_test_set = get_positive_train_test_set()
+    negative_train_set, negative_test_set = get_negative_train_test_set()
 
     # TODO pre process datasets
 
