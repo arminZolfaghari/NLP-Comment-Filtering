@@ -40,10 +40,12 @@ class BigramModel():
                     self.train_neg_dict[word] = 1
 
 
-    def calculate_probability
+    # calculate p(wi|wi-1) = count(wi-1 wi)/count(wi-1)
+    def calculate_simple_conditional_probability(self, word1, word2):
+        if word1
 
     # calculate p(wi|wi-1) = h2 * p(wi|wi-1) + h1 * p(wi) + h0 * e
-    def calculate_conditional_probability(self):
+    def calculate_conditional_probability(self, word1, word2):
 
 
 
