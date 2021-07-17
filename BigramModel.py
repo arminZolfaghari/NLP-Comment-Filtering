@@ -23,10 +23,20 @@ class BigramModel():
         self.count_binary_train_neg_dict = {}
         self.number_words_in_neg = 0
         self.number_words_in_pos = 0
+        self.alpha_cut = 2
+
+    def do_alpha_cut(self):
+        for word in self.count_unary_train_pos_dict.keys():
+            if self.count_unary_train_pos_dict[word] <= 2:
+                del self.count_unary_train_pos_dict[word]
+
+        for word in self.count_unary_train_neg_dict.keys():
+            if self.count_unary_train_neg_dict[word] <= 2:
+                del self.count_unary_train_neg_dict[word]
 
     def create_unary_words_dict(self):
         for sentence in self.train_positive_set:
-            sentence = add_start_end_tag(sentence)
+            sentence = get_words_array(sentence)
             words_in_sent = Counter(sentence)
             for word in words_in_sent.keys():
                 if word in self.count_unary_train_pos_dict.keys():
@@ -35,7 +45,7 @@ class BigramModel():
                     self.count_unary_train_pos_dict[word] = 1
 
         for sentence in self.train_negative_set:
-            sentence = add_start_end_tag(sentence)
+            sentence = get_words_array(sentence)
             words_in_sent = Counter(sentence)
             for word in words_in_sent.keys():
                 if word in self.count_unary_train_neg_dict.keys():
@@ -47,7 +57,7 @@ class BigramModel():
 
     def create_binary_words_dict(self):
         for sentence in self.train_positive_set:
-            sentence = add_start_end_tag(sentence)
+            sentence = get_words_array(sentence)
             words_in_sent = Counter(sentence)
             for word_i in range(len(words_in_sent.keys()) - 1):
                 couple_word = (list(words_in_sent.keys())[word_i], list(words_in_sent.keys())[word_i + 1])
@@ -57,7 +67,7 @@ class BigramModel():
                     self.count_binary_train_pos_dict[couple_word] = 1
 
         for sentence in self.train_negative_set:
-            sentence = add_start_end_tag(sentence)
+            sentence = get_words_array(sentence)
             words_in_sent = Counter(sentence)
             for word_i in range(len(words_in_sent.keys()) - 1):
                 couple_word = (list(words_in_sent.keys())[word_i], list(words_in_sent.keys())[word_i + 1])
