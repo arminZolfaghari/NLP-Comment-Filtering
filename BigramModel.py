@@ -1,15 +1,13 @@
 from collections import Counter
 
+
+# insert <s> to first and append </s> to end array, return words array
 def add_start_end_tag(sentence):
-    for s in sentence:
-        words_in_sent = s.split(' ')
-        words_in_sent.insert(0, '<s>')
-        words_in_sent.append('</s>')
-    return sentence
+    words_in_sent = sentence.split(' ')
+    words_in_sent.insert(0, '<s>')
+    words_in_sent.append('</s>')
 
-
-def standardize_sentence(sentence):
-
+    return words_in_sent
 
 
 class BigramModel():
@@ -68,7 +66,6 @@ class BigramModel():
                 else:
                     self.count_binary_train_neg_dict[couple_word] = 1
 
-
     # calculate p(wi|wi-1) = count(wi-1 wi)/count(wi-1) => p(word2|word1)
     def calculate_simple_conditional_probability(self, word1, word2, dataset_mode):
         if dataset_mode == "positive":
@@ -118,10 +115,11 @@ class BigramModel():
     # calculate p(wi|wi-1) = h2 * p(wi|wi-1) + h1 * p(wi) + h0 * e
     def calculate_conditional_probability(self, word1, word2, dataset_mode):
         [h0, h1, h2] = self.lambda_arr
-        res = h2 * self.calculate_simple_conditional_probability(word1, word2, dataset_mode) + h1 * self.calculate_unary_probability(word2, dataset_mode) + h0 * self.epsilon
+        res = h2 * self.calculate_simple_conditional_probability(word1, word2,
+                                                                 dataset_mode) + h1 * self.calculate_unary_probability(
+            word2, dataset_mode) + h0 * self.epsilon
         return res
 
     def recognize_sentence(self, sentence):
         words_in_sentence =
         for i in range(len(sentence_arr)):
-
