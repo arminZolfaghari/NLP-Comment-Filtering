@@ -34,6 +34,14 @@ class BigramModel():
             if self.count_unary_train_neg_dict[word] <= 2:
                 del self.count_unary_train_neg_dict[word]
 
+    def remove_from_above(self, num):
+        self.count_unary_train_pos_dict = sorted(self.count_unary_train_pos_dict.items(), key=lambda x: x[1], reverse=True)
+        self.count_unary_train_neg_dict = sorted(self.count_unary_train_neg_dict.items(), key=lambda x: x[1], reverse=True)
+
+        for i in range(num):
+            del self.count_unary_train_pos_dict[i]
+            del self.count_unary_train_neg_dict[i]
+
     def create_unary_words_dict(self):
         for sentence in self.train_positive_set:
             sentence = get_words_array(sentence)
