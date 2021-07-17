@@ -2,7 +2,7 @@ from collections import Counter
 
 
 # insert <s> to first and append </s> to end array, return words array
-def add_start_end_tag(sentence):
+def get_words_array(sentence):
     words_in_sent = sentence.split(' ')
     words_in_sent.insert(0, '<s>')
     words_in_sent.append('</s>')
@@ -120,6 +120,6 @@ class BigramModel():
             word2, dataset_mode) + h0 * self.epsilon
         return res
 
+    # recognize sentence is positive or negative
     def recognize_sentence(self, sentence):
-        words_in_sentence =
-        for i in range(len(sentence_arr)):
+        words_array = get_words_array()
