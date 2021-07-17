@@ -55,13 +55,13 @@ def pre_process(set):
             if char in string.punctuation:
                 set[i] = set[i].replace(char, "")
 
-    return set
+    # return set
 
 
 sett = store_positive_comments_from_file()
 print(sett[0])
 print(sett[1])
 
-new_set = pre_process(sett)
-print(new_set[0])
-print(new_set[1])
+pre_process(sett)
+print(sett[0])
+print(sett[1])

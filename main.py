@@ -1,17 +1,32 @@
 from Dataset import *
-import BigramModel
+from BigramModel import *
 
 
 if __name__ == "__main__":
-    # TODO read datasets
+
+    # read datasets
     positive_train_set, positive_test_set = get_positive_train_test_set()
     negative_train_set, negative_test_set = get_negative_train_test_set()
 
-    # TODO pre process datasets
+    # process datasets
+    pre_process(positive_train_set), pre_process(positive_test_set)
+    pre_process(negative_train_set), pre_process(negative_test_set)
 
-    # TODO add tags to the beginning and the end of the sentences
+    # create bigram model object
+    lambda_arr = [0.2, 0.3, 0.5]    # [h0, h1, h2]
+    epsilon = 0.2
+    cut_down = 2
+    cut_above= 10
+    bigram_model = BigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon)
+    bigram_model.learning()     # start learning
 
-    # TODO create bigram model object
+
+    # analyse
+    for i
+
+
+
+
 
     # TODO create unigram model object
 

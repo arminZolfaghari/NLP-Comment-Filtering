@@ -12,7 +12,7 @@ def get_words_array(sentence):
 
 class BigramModel():
 
-    def __init__(self, train_pos_set, train_neg_set, lambda_arr, epsilon):
+    def __init__(self, train_pos_set, train_neg_set, lambda_arr, epsilon, cut_down, cut_above):
         self.train_positive_set = train_pos_set
         self.train_negative_set = train_neg_set
         self.lambda_arr = lambda_arr  # [h0, h1, h2] => weights for probability
@@ -21,24 +21,29 @@ class BigramModel():
         self.count_unary_train_neg_dict = {}
         self.count_binary_train_pos_dict = {}
         self.count_binary_train_neg_dict = {}
-        self.number_words_in_neg = 0
-        self.number_words_in_pos = 0
-        self.alpha_cut = 2
+        # self.number_words_in_neg = 0
+        # self.number_words_in_pos = 0
+        self.cut_down = cut_down
+        self.cut_above = cut_above
 
+    # cut from down
     def do_alpha_cut(self):
         for word in self.count_unary_train_pos_dict.keys():
-            if self.count_unary_train_pos_dict[word] <= 2:
+            if self.count_unary_train_pos_dict[word] <= self.cut_down:
                 del self.count_unary_train_pos_dict[word]
 
         for word in self.count_unary_train_neg_dict.keys():
-            if self.count_unary_train_neg_dict[word] <= 2:
+            if self.count_unary_train_neg_dict[word] <= self.cut_down:
                 del self.count_unary_train_neg_dict[word]
 
-    def remove_from_above(self, num):
-        self.count_unary_train_pos_dict = sorted(self.count_unary_train_pos_dict.items(), key=lambda x: x[1], reverse=True)
-        self.count_unary_train_neg_dict = sorted(self.count_unary_train_neg_dict.items(), key=lambda x: x[1], reverse=True)
+    # cut from above
+    def remove_from_above(self):
+        self.count_unary_train_pos_dict = sorted(self.count_unary_train_pos_dict.items(), key=lambda x: x[1],
+                                                 reverse=True)
+        self.count_unary_train_neg_dict = sorted(self.count_unary_train_neg_dict.items(), key=lambda x: x[1],
+                                                 reverse=True)
 
-        for i in range(num):
+        for i in range(self.cut_above):
             del self.count_unary_train_pos_dict[i]
             del self.count_unary_train_neg_dict[i]
 
@@ -61,7 +66,8 @@ class BigramModel():
                 else:
                     self.count_unary_train_neg_dict[word] = 1
 
-        self.do_alpha_cut()     #
+        self.do_alpha_cut()
+        self.remove_from_above()
         self.calculate_number_words()  # to calculate numbers of all words
 
     def create_binary_words_dict(self):
@@ -147,8 +153,15 @@ class BigramModel():
 
         return PI
 
+    # start learning and create unary and binary words dictionary
+    def learning(self):
+        self.create_unary_words_dict()
+        self.create_binary_words_dict()
+
     # recognize sentence is positive or negative
     def recognize_sentence(self, sentence):
+
+        # calculate sentence probability to recognize better probability
         prob_given_sentence_is_negative = self.calculate_sentence_probability(sentence, "negative")
         prob_given_sentence_is_positive = self.calculate_sentence_probability(sentence, "positive")
         if prob_given_sentence_is_positive > prob_given_sentence_is_negative:
