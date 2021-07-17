@@ -13,6 +13,9 @@ class BigramModel():
         self.count_unary_train_neg_dict = {}
         self.count_binary_train_pos_dict = {}
         self.count_binary_train_neg_dict = {}
+        self.number_words_in_neg = 0
+        self.number_words_in_pos = 0
+
 
 
     def create_unary_words_dict(self):
@@ -37,6 +40,8 @@ class BigramModel():
                     self.count_unary_train_neg_dict[word] += 1
                 else:
                     self.count_unary_train_neg_dict[word] = 1
+
+        self.calculate_number_words()   # to calculate numbers of all words
 
     def create_binary_words_dict(self):
         for sentence in self.train_positive_set:
@@ -64,6 +69,7 @@ class BigramModel():
                     self.count_binary_train_neg_dict[couple_word] = 1
 
 
+
     # calculate p(wi|wi-1) = count(wi-1 wi)/count(wi-1) => p(word2|word1)
     def calculate_simple_conditional_probability(self, word1, word2, dataset_mode):
         if dataset_mode == "positive":
@@ -78,6 +84,25 @@ class BigramModel():
                 res = self.count_binary_train_neg_dict[tuple_words]/self.count_unary_train_neg_dict[word1]  # count(wi-1 wi)/count(wi-1)
             else:
                 res = 0         # when word1 isn't in dict or 'word1 word2' isn't in dict
+
+
+
+    # calculate number of all words in dictionary
+    def calculate_number_words(self):
+        sum_in_pos = 0
+        for key, value in self.count_unary_train_pos_dict:
+            sum_in_pos += value
+        sum_in_neg = 0
+        for key, value in self.count_unary_train_neg_dict:
+            sum_in_neg += value
+
+        self.number_words_in_pos = sum_in_pos
+        self.number_words_in_neg = sum_in_neg
+
+
+    # calculate p(w) = count(w)/M   (M: all words in dictionary)
+    def calculate_unary_probability(self, word, dataset_mode):
+
 
 
     # calculate p(wi|wi-1) = h2 * p(wi|wi-1) + h1 * p(wi) + h0 * e
