@@ -44,8 +44,8 @@ class BigramModel():
                                                  reverse=True)
 
         for i in range(self.cut_above):
-            del self.count_unary_train_pos_dict[i]
-            del self.count_unary_train_neg_dict[i]
+            del self.count_unary_train_pos_dict[list(self.count_unary_train_pos_dict)[i]]
+            del self.count_unary_train_neg_dict[list(self.count_unary_train_neg_dict)[i]]
 
     def create_unary_words_dict(self):
         for sentence in self.train_positive_set:
