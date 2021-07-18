@@ -1,5 +1,7 @@
 from Dataset import *
 from BigramModel import *
+from UnigramModel import *
+
 
 
 def do_test(dict_sentences_with_label, model):
@@ -28,21 +30,33 @@ if __name__ == "__main__":
     lambda_arr = [0.2, 0.4, 0.4]    # [h0, h1, h2]
     epsilon = 0.2
     cut_down = 2
-    cut_above= 10
+    cut_above = 10
     bigram_model = BigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon, cut_down, cut_above)
-    bigram_model.learning()     # start learning
+    bigram_model.learning()     # bigram_model start learning
     # print(bigram_model.count_unary_train_pos_dict)
 
 
     # create unigram model object
-    lambda_arr = [0.4, 0.6]
+    lambda_arr = [0.4, 0.6]     # [h0, h1]
+    epsilon = 0.2
+    cut_down = 2
+    cut_above = 10
+    unigram_model = UnigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon, cut_down, cut_above)
+    unigram_model.learning()    # unigram_model start learning
 
 
     # analyse
     # dictionary keys are labels and values are sentences
     dict_test_with_label = {"positive": positive_test_set, "negative": negative_test_set}
-    accuracy_pos_test = do_test(dict_test_with_label, bigram_model)
-    print("Accuracy in test set : ", accuracy_pos_test * 100)
+
+    print("*** Bigram model ***")
+    bigram_model_accuracy_test = do_test(dict_test_with_label, bigram_model)
+    print("Accuracy in test set : ", bigram_model_accuracy_test * 100)
+
+    print("*** Unigram model ***")
+    unigram_model_accuracy_test = do_test(dict_test_with_label, unigram_model)
+    print("Accuracy in test set : ", unigram_model_accuracy_test * 100)
+
 
 
 

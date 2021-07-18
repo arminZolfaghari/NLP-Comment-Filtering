@@ -119,9 +119,9 @@ class UnigramModel():
     def recognize_sentence(self, sentence):
         # calculate sentence probability to recognize better probability
         prob_given_sentence_is_negative = self.calculate_sentence_probability(sentence, "negative")
-        print("pos prob", prob_given_sentence_is_negative)
+        # print("pos prob", prob_given_sentence_is_negative)
         prob_given_sentence_is_positive = self.calculate_sentence_probability(sentence, "positive")
-        print("neg prob", prob_given_sentence_is_positive)
+        # print("neg prob", prob_given_sentence_is_positive)
         if prob_given_sentence_is_positive > prob_given_sentence_is_negative:
             return "positive"
         elif prob_given_sentence_is_positive < prob_given_sentence_is_negative:
