@@ -2,15 +2,17 @@ from Dataset import *
 from BigramModel import *
 
 
-def do_test(test_set, label, model):
-    correct_answer_count = 0
-    for sentence in test_set:
-        model_response = model.recognize_sentence(sentence)
-        if model_response == label or model_response == "equal":
-            correct_answer_count += 1
+def do_test(dict_sentences_with_label, model):
+    correct_answer_count, number_all_sentences_test = 0, 0
+    for label, sentences in dict_sentences_with_label.items():
+        for sentence in sentences:
+            model_response = model.recognize_sentence(sentence)
+            if model_response == label:
+                correct_answer_count += 1
+            number_all_sentences_test += 1
 
-    print(correct_answer_count / len(test_set))
-    return correct_answer_count/len(test_set)
+
+    return correct_answer_count/ number_all_sentences_test
 
 
 if __name__ == "__main__":
@@ -34,10 +36,12 @@ if __name__ == "__main__":
 
 
     # analyse
-    accuracy_pos_test = do_test(positive_test_set, "positive", bigram_model)
-    print("Accuracy in positive test set : ", accuracy_pos_test * 100)
-    accuracy_neg_test = do_test(negative_test_set, "negative", bigram_model)
-    print("Accuracy in positive test set : ", accuracy_neg_test * 100)
+    # dictionary keys are labels and values are sentences
+    dict_test_with_label = {"positive": positive_test_set, "negative": negative_test_set}
+    accuracy_pos_test = do_test(dict_test_with_label, bigram_model)
+    print("Accuracy in test set : ", accuracy_pos_test * 100)
+
+
 
 
 
