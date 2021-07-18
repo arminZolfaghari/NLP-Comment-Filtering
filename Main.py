@@ -34,6 +34,10 @@ if __name__ == "__main__":
     # print(bigram_model.count_unary_train_pos_dict)
 
 
+    # create unigram model object
+    lambda_arr = [0.4, 0.6]
+
+
     # analyse
     # dictionary keys are labels and values are sentences
     dict_test_with_label = {"positive": positive_test_set, "negative": negative_test_set}

@@ -151,7 +151,7 @@ class BigramModel():
 
     def calculate_sentence_probability(self, sentence, dataset_mode):
         words_array = get_words_array(sentence)
-        PI = 1
+        PI = 1      # probability of sentences
         for i in range(1, len(words_array)):
             PI *= self.calculate_conditional_probability(words_array[i - 1], words_array[i], dataset_mode)
 

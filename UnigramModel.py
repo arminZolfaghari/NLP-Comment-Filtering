@@ -69,9 +69,6 @@ class UnigramModel():
         self.remove_from_above()
         self.calculate_number_words()  # to calculate numbers of all words
 
-
-
-
     # calculate number of all words in dictionary
     def calculate_number_words(self):
         sum_in_pos = 0
@@ -83,11 +80,9 @@ class UnigramModel():
 
         self.number_words_in_pos = sum_in_pos
         self.number_words_in_neg = sum_in_neg
-        # print(self.number_words_in_neg)
-        # print(self.number_words_in_pos)
 
     # calculate p(w) = count(w)/M   (M: all words in dictionary)
-    def calculate_unary_probability(self, word, dataset_mode):
+    def calculate_simple_unary_probability(self, word, dataset_mode):
         if dataset_mode == "positive":
             if word in self.count_unary_train_pos_dict:
                 res = self.count_unary_train_pos_dict[word] / self.number_words_in_pos
@@ -101,32 +96,27 @@ class UnigramModel():
 
         return res
 
-    # calculate p(wi|wi-1) = h2 * p(wi|wi-1) + h1 * p(wi) + h0 * e
-    def calculate_conditional_probability(self, word1, word2, dataset_mode):
-        [h0, h1, h2] = self.lambda_arr
-        res = h2 * self.calculate_simple_conditional_probability(word1, word2,
-                                                                 dataset_mode) + h1 * self.calculate_unary_probability(
-            word2, dataset_mode) + h0 * self.epsilon
+    # calculate p(wi) =  h1 * p(wi) + h0 * e
+    def calculate_unary_probability(self, word, dataset_mode):
+        [h0, h1] = self.lambda_arr
+        res = h1 * self.calculate_simple_unary_probability(word, dataset_mode) + h0 * self.epsilon
 
         return res
 
     def calculate_sentence_probability(self, sentence, dataset_mode):
         words_array = get_words_array(sentence)
-        PI = 1
+        PI = 1      # probability of sentences
         for i in range(1, len(words_array)):
-            PI *= self.calculate_conditional_probability(words_array[i - 1], words_array[i], dataset_mode)
+            PI *= self.calculate_unary_probability(words_array[i], dataset_mode)
 
         return PI
 
-    # start learning and create unary and binary words dictionary
+    # start learning and create unary words dictionary
     def learning(self):
-
         self.create_unary_words_dict()
-        self.create_binary_words_dict()
 
     # recognize sentence is positive or negative
     def recognize_sentence(self, sentence):
-
         # calculate sentence probability to recognize better probability
         prob_given_sentence_is_negative = self.calculate_sentence_probability(sentence, "negative")
         print("pos prob", prob_given_sentence_is_negative)
