@@ -27,13 +27,12 @@ if __name__ == "__main__":
     pre_process(negative_train_set), pre_process(negative_test_set)
 
     # create bigram model object
-    lambda_arr = [0.2, 0.4, 0.4]    # [h0, h1, h2]
+    lambda_arr = [0.33, 0.33, 0.33]    # [h0, h1, h2]
     epsilon = 0.2
     cut_down = 2
     cut_above = 10
     bigram_model = BigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon, cut_down, cut_above)
     bigram_model.learning()     # bigram_model start learning
-    # print(bigram_model.count_unary_train_pos_dict)
 
 
     # create unigram model object

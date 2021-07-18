@@ -56,4 +56,4 @@ def pre_process(set):
                 set[i] = set[i].replace(char, " ")
 
     for i in range(len(set)):
-        i = i.lower()
+        set[i] = set[i].lower()
