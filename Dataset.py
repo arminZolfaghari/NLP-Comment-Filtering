@@ -53,15 +53,4 @@ def pre_process(set):
     for i in range(len(set)):
         for char in set[i]:
             if char in string.punctuation:
-                set[i] = set[i].replace(char, "")
-
-    # return set
-
-
-# sett = store_positive_comments_from_file()
-# print(sett[0])
-# print(sett[1])
-#
-# pre_process(sett)
-# print(sett[0])
-# print(sett[1])
+                set[i] = set[i].replace(char, " ")
