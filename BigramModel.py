@@ -28,11 +28,11 @@ class BigramModel():
 
     # cut from down
     def do_alpha_cut(self):
-        for word in self.count_unary_train_pos_dict.keys():
+        for word in list(self.count_unary_train_pos_dict):
             if self.count_unary_train_pos_dict[word] <= self.cut_down:
                 del self.count_unary_train_pos_dict[word]
 
-        for word in self.count_unary_train_neg_dict.keys():
+        for word in list(self.count_unary_train_neg_dict):
             if self.count_unary_train_neg_dict[word] <= self.cut_down:
                 del self.count_unary_train_neg_dict[word]
 
