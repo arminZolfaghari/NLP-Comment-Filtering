@@ -58,10 +58,10 @@ def pre_process(set):
     # return set
 
 
-sett = store_positive_comments_from_file()
-print(sett[0])
-print(sett[1])
-
-pre_process(sett)
-print(sett[0])
-print(sett[1])
+# sett = store_positive_comments_from_file()
+# print(sett[0])
+# print(sett[1])
+#
+# pre_process(sett)
+# print(sett[0])
+# print(sett[1])
