@@ -54,3 +54,6 @@ def pre_process(set):
         for char in set[i]:
             if char in string.punctuation:
                 set[i] = set[i].replace(char, " ")
+
+    for i in range(len(set)):
+        i = i.lower()
