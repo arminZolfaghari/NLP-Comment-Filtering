@@ -66,8 +66,8 @@ class BigramModel():
                 else:
                     self.count_unary_train_neg_dict[word] = 1
 
-        self.do_alpha_cut()
-        self.remove_from_above()
+        # self.do_alpha_cut()
+        # self.remove_from_above()
         self.calculate_number_words()  # to calculate numbers of all words
 
     def create_binary_words_dict(self):
@@ -113,14 +113,16 @@ class BigramModel():
     # calculate number of all words in dictionary
     def calculate_number_words(self):
         sum_in_pos = 0
-        for key, value in self.count_unary_train_pos_dict:
+        for value in self.count_unary_train_pos_dict.values():
             sum_in_pos += value
         sum_in_neg = 0
-        for key, value in self.count_unary_train_neg_dict:
+        for value in self.count_unary_train_neg_dict.values():
             sum_in_neg += value
 
         self.number_words_in_pos = sum_in_pos
         self.number_words_in_neg = sum_in_neg
+        # print(self.number_words_in_neg)
+        # print(self.number_words_in_pos)
 
     # calculate p(w) = count(w)/M   (M: all words in dictionary)
     def calculate_unary_probability(self, word, dataset_mode):
@@ -143,12 +145,15 @@ class BigramModel():
         res = h2 * self.calculate_simple_conditional_probability(word1, word2,
                                                                  dataset_mode) + h1 * self.calculate_unary_probability(
             word2, dataset_mode) + h0 * self.epsilon
+
+        print(res)
         return res
 
     def calculate_sentence_probability(self, sentence, dataset_mode):
         words_array = get_words_array(sentence)
         PI = self.calculate_unary_probability(words_array[0], dataset_mode)
         for i in range(1, len(words_array)):
+            print(self.calculate_conditional_probability(words_array[i - 1], words_array[i], dataset_mode))
             PI *= self.calculate_conditional_probability(words_array[i - 1], words_array[i], dataset_mode)
 
         return PI

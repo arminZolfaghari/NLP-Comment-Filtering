@@ -9,6 +9,7 @@ def do_test(test_set, label, model):
         if model_response == label or model_response == "equal":
             correct_answer_count += 1
 
+    print(correct_answer_count / len(test_set))
     return correct_answer_count/len(test_set)
 
 
@@ -29,13 +30,14 @@ if __name__ == "__main__":
     cut_above= 10
     bigram_model = BigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon, cut_down, cut_above)
     bigram_model.learning()     # start learning
+    # print(bigram_model.count_unary_train_pos_dict)
 
-
+    arr = ['effective but too-tepid biopic']
     # analyse
-    accuracy_pos_test = do_test(positive_test_set, "positive", bigram_model)
-    print("Accuracy in positive test set : ".format(accuracy_pos_test * 100))
-    accuracy_neg_test = do_test(negative_test_set, "negative", bigram_model)
-    print("Accuracy in negative test set : ".format(accuracy_neg_test * 100))
+    accuracy_pos_test = do_test(arr, "positive", bigram_model)
+    print("Accuracy in positive test set : ", accuracy_pos_test * 100)
+    # accuracy_neg_test = do_test(negative_test_set, "negative", bigram_model)
+    # print("Accuracy in negative test set : ".format(accuracy_neg_test * 100))
 
 
 
