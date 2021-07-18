@@ -47,13 +47,8 @@ class BigramModel():
         self.count_unary_train_neg_dict = dict(self.count_unary_train_neg_dict)
 
         for i in range(self.cut_above):
-            print(i)
-            print(list(self.count_unary_train_pos_dict)[0])
-            self.count_unary_train_pos_dict.pop(list(self.count_unary_train_pos_dict)[0])
-            # print('test: ', self.count_unary_train_pos_dict[list(self.count_unary_train_pos_dict)[int(i)]])
-
-            # del self.count_unary_train_pos_dict[list(self.count_unary_train_pos_dict)[i]]
-            # del self.count_unary_train_neg_dict[list(self.count_unary_train_neg_dict)[i]]
+            del self.count_unary_train_pos_dict[list(self.count_unary_train_pos_dict)[i]]
+            del self.count_unary_train_neg_dict[list(self.count_unary_train_neg_dict)[i]]
 
     def create_unary_words_dict(self):
         for sentence in self.train_positive_set:
