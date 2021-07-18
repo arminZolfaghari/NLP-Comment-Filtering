@@ -39,10 +39,19 @@ if __name__ == "__main__":
     accuracy_neg_test = do_test(negative_test_set, "negative", bigram_model)
     print("Accuracy in positive test set : ", accuracy_neg_test * 100)
 
-
-
-
-
+    # get input from user
+    while True:
+        input_sent = input("Enter a sentence: ")
+        if input_sent == '!q':
+            break
+        else:
+            label = bigram_model.recognize_sentence(input_sent)
+            if label == 'positive':
+                print('do not filter this')
+            elif label == 'negative':
+                print('filter this')
+            else:
+                print('cant say for sure :/')
 
 
     # TODO create unigram model object
