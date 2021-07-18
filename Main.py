@@ -32,12 +32,12 @@ if __name__ == "__main__":
     bigram_model.learning()     # start learning
     # print(bigram_model.count_unary_train_pos_dict)
 
-    arr = ['effective but too-tepid biopic']
+
     # analyse
-    accuracy_pos_test = do_test(arr, "positive", bigram_model)
+    accuracy_pos_test = do_test(positive_test_set, "positive", bigram_model)
     print("Accuracy in positive test set : ", accuracy_pos_test * 100)
-    # accuracy_neg_test = do_test(negative_test_set, "negative", bigram_model)
-    # print("Accuracy in negative test set : ".format(accuracy_neg_test * 100))
+    accuracy_neg_test = do_test(negative_test_set, "negative", bigram_model)
+    print("Accuracy in positive test set : ", accuracy_neg_test * 100)
 
 
 
