@@ -11,7 +11,6 @@ def do_test(dict_sentences_with_label, model):
                 correct_answer_count += 1
             number_all_sentences_test += 1
 
-
     return correct_answer_count/ number_all_sentences_test
 
 
