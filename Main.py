@@ -3,7 +3,6 @@ from BigramModel import *
 from UnigramModel import *
 
 
-
 def do_test(dict_sentences_with_label, model):
     correct_answer_count, number_all_sentences_test = 0, 0
     for label, sentences in dict_sentences_with_label.items():
@@ -13,7 +12,7 @@ def do_test(dict_sentences_with_label, model):
                 correct_answer_count += 1
             number_all_sentences_test += 1
 
-    return correct_answer_count/ number_all_sentences_test
+    return correct_answer_count / number_all_sentences_test
 
 
 if __name__ == "__main__":
@@ -27,22 +26,20 @@ if __name__ == "__main__":
     pre_process(negative_train_set), pre_process(negative_test_set)
 
     # create bigram model object
-    lambda_arr = [0.33, 0.33, 0.33]    # [h0, h1, h2]
+    lambda_arr = [0.1, 0.3, 0.6]  # [h0, h1, h2]
     epsilon = 0.2
     cut_down = 2
     cut_above = 10
     bigram_model = BigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon, cut_down, cut_above)
-    bigram_model.learning()     # bigram_model start learning
-
+    bigram_model.learning()  # bigram_model start learning
 
     # create unigram model object
-    lambda_arr = [0.4, 0.6]     # [h0, h1]
+    lambda_arr = [0.2, 0.8]  # [h0, h1]
     epsilon = 0.2
     cut_down = 2
     cut_above = 10
     unigram_model = UnigramModel(positive_train_set, negative_train_set, lambda_arr, epsilon, cut_down, cut_above)
-    unigram_model.learning()    # unigram_model start learning
-
+    unigram_model.learning()  # unigram_model start learning
 
     # analyse
     # dictionary keys are labels and values are sentences
@@ -55,9 +52,6 @@ if __name__ == "__main__":
     print("*** Unigram model ***")
     unigram_model_accuracy_test = do_test(dict_test_with_label, unigram_model)
     print("Accuracy in test set : ", unigram_model_accuracy_test * 100)
-
-
-
 
     # get input from user
     while True:
@@ -72,6 +66,5 @@ if __name__ == "__main__":
                 print('filter this')
             else:
                 print('cant say for sure :/')
-
 
     # TODO create unigram model object
