@@ -25,7 +25,7 @@ if __name__ == "__main__":
     pre_process(negative_train_set), pre_process(negative_test_set)
 
     # create bigram model object
-    lambda_arr = [0.2, 0.3, 0.5]    # [h0, h1, h2]
+    lambda_arr = [0.2, 0.4, 0.4]    # [h0, h1, h2]
     epsilon = 0.2
     cut_down = 2
     cut_above= 10

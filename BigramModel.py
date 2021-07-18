@@ -21,8 +21,6 @@ class BigramModel():
         self.count_unary_train_neg_dict = {}
         self.count_binary_train_pos_dict = {}
         self.count_binary_train_neg_dict = {}
-        # self.number_words_in_neg = 0
-        # self.number_words_in_pos = 0
         self.cut_down = cut_down
         self.cut_above = cut_above
 
@@ -170,7 +168,9 @@ class BigramModel():
 
         # calculate sentence probability to recognize better probability
         prob_given_sentence_is_negative = self.calculate_sentence_probability(sentence, "negative")
+        print("pos prob", prob_given_sentence_is_negative)
         prob_given_sentence_is_positive = self.calculate_sentence_probability(sentence, "positive")
+        print("neg prob", prob_given_sentence_is_positive)
         if prob_given_sentence_is_positive > prob_given_sentence_is_negative:
             return "positive"
         elif prob_given_sentence_is_positive < prob_given_sentence_is_negative:
