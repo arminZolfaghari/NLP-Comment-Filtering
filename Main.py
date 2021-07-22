@@ -67,4 +67,4 @@ if __name__ == "__main__":
             else:
                 print('cant say for sure :/')
 
-    # TODO create unigram model object
+
