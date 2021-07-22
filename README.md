@@ -14,6 +14,11 @@ A sample run:
 
 ![alt text](https://github.com/arminZolfaghari/NLP/blob/main/sample%20run.jpg "sample run")
 
+
+Check full description [here](https://github.com/arminZolfaghari/NLP-Comment-Filtering/blob/main/AI_P4.pdf)
+
+Project report (in persian): tried different coefficients and tried the models with and without cut_down and cut_above and checked the results [here](https://github.com/arminZolfaghari/NLP-Comment-Filtering/blob/main/AI_P4_Report.pdf) 
+
 Check our other AI Course projects:
 * [Project 1: Searching Algorithms (IDS, BBFS, A*)](https://github.com/arminZolfaghari/AI_project1)
 * [Project 2: Genetic-Algorithm](https://github.com/Amirhossein-Rajabpour/Genetic-Algorithm)
